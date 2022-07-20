@@ -33,137 +33,189 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBar(
-          title: Text('$userShopName'),
-          leading: const Icon(Icons.person, size: 40,),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.settings),
-            ),
-          ],
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(height: 15,),
-                Container(
-                  width: 325,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                      borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: const Center(
-                    child: Text('Dashboard', style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),),
-                  ),
-                ),
-                const SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_)=>const ClientScreen()));
-                      },
-                      child: Container(
-                        width: 150,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: const Center(
-                          child: Text('Client', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_)=>const SellsScreen()));
-                      },
-                      child: Container(
-                        width: 150,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: const Center(
-                          child: Text('Sells', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20,),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      width: 150,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Center(
-                        child: Text('Purchase', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),),
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Center(
-                        child: Text('Supliers', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20,),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      width: 150,
-                      height: 130,
-                      child: Center(
-                        child: Text('Products', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    Container(
-                      width: 150,
-                      height: 130,
-                      child: Center(
-                        child: Text('Cash register', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ],
-                ),
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(43, 136, 216, 1),
+                Color.fromRGBO(43, 136, 216, 1)
               ],
             ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 120,
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(width: 20,),
+                    Container(
+                      child: Icon(Icons.person, size: 40, color: Colors.white),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: Card(
+                        color:  Color.fromRGBO(43, 136, 216, 1),
+                        elevation: 0,
+                        child: ListTile(
+                          title: Text('$userShopName', style: TextStyle(fontSize: 21, color: Colors.white, fontFamily: 'Gilroy-Regular')),
+                          subtitle: Text('Version', style: TextStyle(fontSize: 18, color: Colors.white, fontFamily: 'Gilroy-Regular')),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 20),
+                      child: Icon(Icons.settings, color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                  color: Color.fromRGBO(246, 247, 248, 1),
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_)=>const ClientScreen()));
+                            },
+                            child: Container(
+                              width: 160,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('Client', style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Gilroy-Regular'),),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: (){},
+                            child: Container(
+                              width: 160,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('Sells', style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Gilroy-Regular'),),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: (){},
+                            child: Container(
+                              width: 160,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('Purchase', style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Gilroy-Regular'),),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: (){},
+                            child: Container(
+                              width: 160,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('Suplier', style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Gilroy-Regular'),),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: (){},
+                            child: Container(
+                              width: 160,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('Products', style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Gilroy-Regular'),),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: (){},
+                            child: Container(
+                              width: 160,
+                              height: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('Cash register', style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Gilroy-Regular'),),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Container(
+                        width: 325,
+                        height: 130,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text('Analysis', style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'Gilroy-Regular'),),
+                        ),
+                      ),
+                      SizedBox(height: 10,)
+
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
