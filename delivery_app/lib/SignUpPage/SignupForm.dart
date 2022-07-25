@@ -40,14 +40,20 @@ class _SignupFormState extends State<SignupForm> {
           backgroundColor: Colors.transparent,
           actions: [
             Container(
-              width: 80,
-              margin: const EdgeInsetsDirectional.only(end: 20),
+              width: 89,
+              height: 28,
+              margin: const EdgeInsetsDirectional.only(start: 12 ,top: 25, end: 20),
               decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Center(child: Text('Step 1 of 2',
                 style: TextStyle(
-                  fontFamily: 'Gilroy-Regular',
+                  fontSize: 13,
+                  color: Color.fromRGBO(54, 61, 78, 1),
+                  fontFamily: 'Inter-SemiBold',
+                  letterSpacing: -0.11999999731779099,
+                    height: 1.3846153846153846,
                 ),
               )),
             ),
@@ -82,21 +88,26 @@ class _SignupFormState extends State<SignupForm> {
                             margin: const EdgeInsetsDirectional.only(start: 25),
                             child: const Text('Sign Up',
                               style: TextStyle(
-                                fontFamily: 'Gilroy-Bold',
-                                color: Colors.black,
-                                fontSize: 30,
+                                fontFamily: 'Inter-Bold',
+                                color: Color.fromRGBO(4, 12, 34, 1),
+                                letterSpacing: -0.23999999463558197,
+                                fontSize: 32,
+                                  height: 1.1875
                               ),
                             ),
                           ),
                         ),
+                        SizedBox(height: 5,),
 
                         Container(
                             margin: const EdgeInsetsDirectional.only(start: 22, end: 22),
                             child: const Text('We ask for your information to keep your data '
                                 'safe and secure',
                             style: TextStyle(
-                              fontFamily: 'Gilroy-Regular',
-                              color: Colors.black,
+                              fontFamily: 'Inter-Regular',
+                              color: Color.fromRGBO(54, 61, 78, 1),
+                              letterSpacing: -0.20000000298023224,
+                                height: 1.4666666666666666
                             ),)
                         ),
 
@@ -104,6 +115,13 @@ class _SignupFormState extends State<SignupForm> {
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           margin: const EdgeInsets.only(top: 10.0),
                           child: TextFormField(
+                            style: TextStyle(
+                              color: Color.fromRGBO(4, 12, 34, 1),
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 17,
+                              letterSpacing: -0.4000000059604645,
+                                height: 1.411764705882353
+                            ),
                             controller: _email,
                             keyboardType: TextInputType.emailAddress,
                             validator: (value){
@@ -137,6 +155,13 @@ class _SignupFormState extends State<SignupForm> {
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           margin: const EdgeInsets.only(top: 10.0),
                           child: TextFormField(
+                            style: TextStyle(
+                                color: Color.fromRGBO(4, 12, 34, 1),
+                                fontFamily: 'Inter-Regular',
+                                fontSize: 17,
+                                letterSpacing: -0.4000000059604645,
+                                height: 1.411764705882353
+                            ),
                             controller: _password,
                             obscureText: _isObscure,
                             decoration:  InputDecoration(
@@ -166,6 +191,57 @@ class _SignupFormState extends State<SignupForm> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 10,),
+
+                        Container(
+                          margin: EdgeInsets.only(top: 7 ,left: 26),
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(Icons.check, color: Colors.green,),
+                                  SizedBox(width: 7,),
+                                  Text('Has at least 8 characters',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(92, 97, 111, 1),
+                                    fontFamily: 'Inter-Regular',
+                                    fontSize: 13,
+                                    letterSpacing: -0.11999999731779099,
+                                      height: 1.3846153846153846
+                                  ),),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Icon(Icons.check, color: Colors.green,),
+                                  SizedBox(width: 7,),
+                                  Text('Has an uppercase letter or symbol',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(92, 97, 111, 1),
+                                        fontFamily: 'Inter-Regular',
+                                        fontSize: 13,
+                                        letterSpacing: -0.11999999731779099,
+                                        height: 1.3846153846153846
+                                    ),),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Icon(Icons.check, color: Colors.green,),
+                                  SizedBox(width: 7,),
+                                  Text('Has a number',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(92, 97, 111, 1),
+                                        fontFamily: 'Inter-Regular',
+                                        fontSize: 13,
+                                        letterSpacing: -0.11999999731779099,
+                                        height: 1.3846153846153846
+                                    ),),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
 
 
                         Container(
@@ -175,9 +251,11 @@ class _SignupFormState extends State<SignupForm> {
                               const Text(
                                 'Already have an account ? ',
                                 style: TextStyle(
-                                  fontFamily: 'Gilroy-Regular',
+                                  fontFamily: 'Inter-SemiBold',
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -0.20000000298023224,
+                                  height: 1.4666666666666666,
+                                  fontWeight: FontWeight.normal,
                                   color: Color.fromRGBO(0, 147, 185, 1),
                                 ),
                               ),
@@ -188,9 +266,11 @@ class _SignupFormState extends State<SignupForm> {
                                   },
                                   child: const Text('Sign In here',
                                     style: TextStyle(
-                                      fontFamily: 'Gilroy-Regular',
+                                      fontFamily: 'Inter-SemiBold',
                                       fontSize: 15,
-                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: -0.20000000298023224,
+                                      height: 1.4666666666666666,
+                                      fontWeight: FontWeight.normal,
                                       color: Color.fromRGBO(0, 147, 185, 1),
                                     ),
                                   ),
@@ -208,7 +288,8 @@ class _SignupFormState extends State<SignupForm> {
                               TextSpan(
                                 text: 'By using our mobile app, you agree to our ',
                                 style: TextStyle(
-                                  fontFamily: 'Gilroy-Regular',
+                                  fontSize: 13,
+                                  fontFamily: 'Inter-Regular',
                                 ),
                                 children: [
                                   TextSpan(
@@ -231,9 +312,10 @@ class _SignupFormState extends State<SignupForm> {
 
                         Container(
                           // rgba(43, 136, 216, 1)
+                            width: 359.2640075683594,
                           height: 56,
                             margin: EdgeInsets.all(30.0),
-                            width: double.infinity,
+                            //width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0),
                               //color: Color.fromRGBO(43, 136, 216, 1),
@@ -246,7 +328,9 @@ class _SignupFormState extends State<SignupForm> {
                               style:  ElevatedButton.styleFrom(
                                 primary: Color.fromRGBO(43, 136, 216, 1),
                                 textStyle: TextStyle(
-                                  fontFamily: 'Gilroy-Regular',
+                                  fontFamily: 'Inter-Regular',
+                                  letterSpacing: -0.4000000059604645,
+                                  //fontSize: 17,
                                 )
                               ),
                               onPressed: (){
@@ -255,8 +339,8 @@ class _SignupFormState extends State<SignupForm> {
                               child: const Text('Continue',
                                 style: TextStyle(
                                   //fontFamily: 'Gilroy-Regular',
-                                  fontSize: 21,
                                   color: Colors.white,
+                                  fontSize: 17,
                                   //fontWeight: FontWeight.bold,
                                 ),
                               ),

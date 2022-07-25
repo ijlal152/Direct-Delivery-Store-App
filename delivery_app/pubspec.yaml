@@ -35,6 +35,7 @@ dependencies:
   toast: ^0.3.0
   email_validator: ^2.0.1
   shared_preferences: ^2.0.15
+  getwidget: ^3.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,6 +45,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.3
+
+flutter_icons:
+  image_path: 'assets/appicons/appicon.png'
+  android: true
+  ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -66,6 +73,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/appicons/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -88,9 +96,18 @@ flutter:
     - family: Gilroy-Bold
       fonts:
         - asset: assets/fonts/Gilroy-Bold.ttf
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+
+    - family: Inter-Regular
+      fonts:
+        - asset: assets/fonts/Inter-Regular.otf
+
+    - family: Inter-Bold
+      fonts:
+        - asset: assets/fonts/Inter-Bold.otf
+
+    - family: Inter-SemiBold
+      fonts:
+        - asset: assets/fonts/Inter-SemiBold.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

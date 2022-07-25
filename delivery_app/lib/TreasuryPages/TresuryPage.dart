@@ -1,15 +1,13 @@
-import 'package:delivery_app/clientpages/addClient.dart';
-import 'package:delivery_app/clientpages/clientDashboard.dart';
 import 'package:flutter/material.dart';
 
-class ClientScreen extends StatefulWidget {
-  const ClientScreen({Key? key}) : super(key: key);
+class TresuryPage extends StatefulWidget {
+  const TresuryPage({Key? key}) : super(key: key);
 
   @override
-  State<ClientScreen> createState() => _ClientScreenState();
+  State<TresuryPage> createState() => _TresuryPageState();
 }
 
-class _ClientScreenState extends State<ClientScreen> {
+class _TresuryPageState extends State<TresuryPage> {
 
   final List<Map<String, dynamic>> _allusers = [
     {"id": 1, "name": "Andy", "date": 'Today'},
@@ -55,7 +53,6 @@ class _ClientScreenState extends State<ClientScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,7 +61,7 @@ class _ClientScreenState extends State<ClientScreen> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: const Text('Clients', style: TextStyle(color: Colors.white, fontFamily: 'Inter-Regular'),),
+          title: const Text('Tresury', style: TextStyle(color: Colors.white, fontFamily: 'Inter-Regular'),),
           centerTitle: true,
 
           leading: IconButton(
@@ -74,12 +71,8 @@ class _ClientScreenState extends State<ClientScreen> {
             },
           ),
           actions: <Widget>[
-            IconButton(
-                onPressed: (){},
-                icon: Icon(Icons.visibility_off_outlined, color: Colors.white,),
-            )
-          ],
 
+          ],
         ),
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -104,7 +97,7 @@ class _ClientScreenState extends State<ClientScreen> {
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
-                    fontFamily: 'Inter-SemiBold'),
+                    fontFamily: 'Inter-Regular'),
               ),
               const SizedBox(
                 height: 10,
@@ -113,7 +106,7 @@ class _ClientScreenState extends State<ClientScreen> {
                 '395,200.00',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 29,
+                    fontSize: 26,
                     fontFamily: 'Inter-Bold'),
               ),
               Expanded(
@@ -128,9 +121,6 @@ class _ClientScreenState extends State<ClientScreen> {
                     child: Column(
                       children: <Widget>[
                         TextField(
-                          style: TextStyle(
-                            color : Color.fromRGBO(246, 247, 248, 1),
-                          ),
                           onChanged: (value) => _runFilter(value),
                           decoration: const InputDecoration(
                             suffixIcon: Icon(Icons.search),
@@ -138,19 +128,11 @@ class _ClientScreenState extends State<ClientScreen> {
                             //fillColor: Color.fromRGBO(246, 247, 248, 2),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
                                   topRight: Radius.circular(20)
                               ),
                               borderSide: BorderSide(color: Colors.transparent),
                             ),
-
-                            // enabledBorder: OutlineInputBorder(
-                            //     borderRadius: BorderRadius.only(
-                            //       topLeft: Radius.circular(20),
-                            //       topRight: Radius.circular(20),
-                            //     ),
-                            //     borderSide: BorderSide(color: Colors.transparent),
-                            // ),
                           ),
 
                         ),
@@ -158,7 +140,7 @@ class _ClientScreenState extends State<ClientScreen> {
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              color : Color.fromRGBO(255, 255, 255, 1),
+                              color: Colors.white,
                             ),
                             child: _foundUsers.isNotEmpty
                                 ? ListView.builder(
@@ -169,7 +151,7 @@ class _ClientScreenState extends State<ClientScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(0),
                                 ),
-                                //color: Colors.white,
+                                color: Colors.white,
                                 //margin:const EdgeInsets.symmetric(vertical: 0.2),
                                 margin: EdgeInsets.only(left: 5, top: 0.2, bottom: 0, right: 5),
                                 child: ListTile(
@@ -183,9 +165,9 @@ class _ClientScreenState extends State<ClientScreen> {
                                     child: Text(
                                       _foundUsers[index]["id"].toString(),
                                       style: const TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Inter-Bold',
-                                          height: 1.5,
+                                        fontSize: 16,
+                                        fontFamily: 'Inter-Bold',
+                                        height: 1.5,
                                         color: Color.fromRGBO(0, 0, 0, 1),
                                       ),
                                     ),
@@ -209,25 +191,23 @@ class _ClientScreenState extends State<ClientScreen> {
                                       letterSpacing: 0.5,
                                     ),
                                   ),
-                                  trailing: Text('Money',
-                                    style: TextStyle(
-                                        fontFamily: 'Inter-Regular',
-                                      fontSize: 16,
-                                      letterSpacing: 0.15000000596046448,
-                                        height: 1.5,
-                                      color: Color.fromRGBO(0, 177, 103, 1),
-                                    ),
-                                  ),
+                                  trailing: Text('Money', style: TextStyle(
+                                    fontFamily: 'Inter-Regular',
+                                    fontSize: 16,
+                                    letterSpacing: 0.15000000596046448,
+                                    height: 1.5,
+                                    color: Color.fromRGBO(0, 177, 103, 1),
+                                  ),),
                                   onTap: (){
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (_)=> ClientDashBoard()));
+                                    // Navigator.push(context,
+                                    //     MaterialPageRoute(builder: (_)=> ClientDashBoard()));
                                   },
                                 ),
                               ),
                             )
                                 : const Text(
                               'No result found',
-                              style: TextStyle(fontSize: 24,fontFamily: 'Inter-Regular',),
+                              style: TextStyle(fontSize: 24, fontFamily: 'Inter-Regular',),
                             ),
                           ),
                         ),
@@ -240,8 +220,8 @@ class _ClientScreenState extends State<ClientScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_)=> AddClient()));
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (_)=> AddClient()));
           },
           backgroundColor: Colors.blue,
           child: Icon(Icons.add),

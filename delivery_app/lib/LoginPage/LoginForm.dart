@@ -105,9 +105,12 @@ class _LoginFormState extends State<LoginForm> {
                           margin: const EdgeInsetsDirectional.only(start: 25),
                           child: const Text('Sign In',
                             style: TextStyle(
-                              fontFamily: 'Gilroy-Bold',
-                              color: Colors.black,
-                              fontSize: 30,
+                                color: Color.fromRGBO(4, 12, 34, 1),
+                                fontFamily: 'Inter-Bold',
+                                fontSize: 32,
+                                letterSpacing: -0.23999999463558197,
+                                fontWeight: FontWeight.normal,
+                                height: 1.1875
                             ),
                           ),
                         ),
@@ -116,6 +119,13 @@ class _LoginFormState extends State<LoginForm> {
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         margin: EdgeInsets.only(top: 10.0),
                         child: TextFormField(
+                          style: TextStyle(
+                              color: Color.fromRGBO(4, 12, 34, 1),
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 17,
+                              letterSpacing: -0.4000000059604645,
+                              height: 1.411764705882353
+                          ),
                           controller: _uemail,
                           validator: (value){
                             if(value == null || value.isEmpty){
@@ -146,6 +156,13 @@ class _LoginFormState extends State<LoginForm> {
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         margin: EdgeInsets.only(top: 10.0),
                         child: TextFormField(
+                          style: TextStyle(
+                              color: Color.fromRGBO(4, 12, 34, 1),
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 17,
+                              letterSpacing: -0.4000000059604645,
+                              height: 1.411764705882353
+                          ),
                           controller: _upassword,
                           obscureText: _isObscure,
                           validator: (value){
@@ -189,23 +206,28 @@ class _LoginFormState extends State<LoginForm> {
                             const Text(
                               'Forgot Password?',
                               style: TextStyle(
-                                fontFamily: 'Gilroy-Regular',
-                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Inter-SemiBold',
+                                fontSize: 15,
+                                letterSpacing: -0.20000000298023224,
+                                height: 1.4666666666666666,
+                                fontWeight: FontWeight.normal,
                                 color: Color.fromRGBO(0, 147, 185, 1),
                               ),
                             ),
                             TextButton(
                                 onPressed: (){
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (_)=>SignupForm()));
+
                                 },
                                 child: const Text('Click here',
-                                style: TextStyle(
-                                  fontFamily: 'Gilroy-Regular',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromRGBO(0, 147, 185, 1),
-                                ),)
+                                  style: TextStyle(
+                                    fontFamily: 'Inter-SemiBold',
+                                    fontSize: 15,
+                                    letterSpacing: -0.20000000298023224,
+                                    height: 1.4666666666666666,
+                                    fontWeight: FontWeight.normal,
+                                    color: Color.fromRGBO(0, 147, 185, 1),
+                                  ),
+                                )
                             ),
                           ],
                         ),
@@ -219,20 +241,26 @@ class _LoginFormState extends State<LoginForm> {
                             const Text(
                               "Don't have an account ? ",
                               style: TextStyle(
-                                fontFamily: 'Gilroy-Regular',
+                                fontFamily: 'Inter-SemiBold',
                                 fontSize: 15,
-                                fontWeight: FontWeight.bold,
+                                letterSpacing: -0.20000000298023224,
+                                height: 1.4666666666666666,
+                                fontWeight: FontWeight.normal,
                                 color: Color.fromRGBO(0, 147, 185, 1),
                               ),
                             ),
                             TextButton(
                               onPressed: (){
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (_)=>SignupForm()));
                               },
                               child: const Text('Sign Up here',
                                 style: TextStyle(
-                                  fontFamily: 'Gilroy-Regular',
+                                  fontFamily: 'Inter-SemiBold',
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -0.20000000298023224,
+                                  height: 1.4666666666666666,
+                                  fontWeight: FontWeight.normal,
                                   color: Color.fromRGBO(0, 147, 185, 1),
                                 ),
                               ),
@@ -252,7 +280,8 @@ class _LoginFormState extends State<LoginForm> {
                             style:  ElevatedButton.styleFrom(
                                 primary: Color.fromRGBO(43, 136, 216, 1),
                                 textStyle: TextStyle(
-                                  fontFamily: 'Gilroy-Regular',
+                                  fontFamily: 'Inter-Regular',
+                                  letterSpacing: -0.4000000059604645,
                                 )
                             ),
                             onPressed: (){
@@ -261,10 +290,8 @@ class _LoginFormState extends State<LoginForm> {
                             },
                             child: const Text('Sign In',
                               style: TextStyle(
-                                //fontFamily: 'Gilroy-Regular',
-                                fontSize: 21,
                                 color: Colors.white,
-                                //fontWeight: FontWeight.bold,
+                                fontSize: 17,
                               ),
                             ),
                           )

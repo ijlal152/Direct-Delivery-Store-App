@@ -82,14 +82,21 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
           backgroundColor: Colors.transparent,
           actions: [
             Container(
-              width: 80,
-              margin: const EdgeInsetsDirectional.only(end: 20),
+              width: 89,
+              height: 25,
+              margin: const EdgeInsetsDirectional.only(top: 17, end: 20),
               decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Center(child: Text('Step 2 of 2',
                 style: TextStyle(
-                  fontFamily: 'Gilroy-Regular',
+                  fontSize: 13,
+                  color: Color.fromRGBO(54, 61, 78, 1),
+                  fontFamily: 'Inter-SemiBold',
+                  letterSpacing: -0.11999999731779099,
+                  height: 1.3846153846153846,
+
                 ),
               )),
             ),
@@ -125,9 +132,11 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                           margin: const EdgeInsetsDirectional.only(start: 25),
                           child: const Text('Sign Up',
                             style: TextStyle(
-                              fontFamily: 'Gilroy-Bold',
-                              color: Colors.black,
-                              fontSize: 30,
+                              fontFamily: 'Inter-Bold',
+                              color: Color.fromRGBO(4, 12, 34, 1),
+                              fontSize: 32,
+                              height: 1.1875,
+                              letterSpacing: -0.23999999463558197,
                             ),
                           ),
                         ),
@@ -138,8 +147,11 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                           child: const Text('We ask for your information to keep your data '
                               'safe and secure',
                             style: TextStyle(
-                              fontFamily: 'Gilroy-Regular',
-                              color: Colors.black,
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 15,
+                              letterSpacing: -0.20000000298023224,
+                              color: Color.fromRGBO(54, 61, 78, 1),
+                                height: 1.4666666666666666
                             ),)
                       ),
 
@@ -147,6 +159,13 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         margin: const EdgeInsets.only(top: 10.0),
                         child: TextFormField(
+                          style: TextStyle(
+                              color: Color.fromRGBO(4, 12, 34, 1),
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 17,
+                              letterSpacing: -0.4000000059604645,
+                              height: 1.411764705882353
+                          ),
                           controller: _fullname,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
@@ -170,6 +189,13 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         margin: EdgeInsets.only(top: 10.0),
                         child: TextFormField(
+                          style: TextStyle(
+                              color: Color.fromRGBO(4, 12, 34, 1),
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 17,
+                              letterSpacing: -0.4000000059604645,
+                              height: 1.411764705882353
+                          ),
                           controller: _shopname,
                           decoration: const InputDecoration(
                             enabledBorder: OutlineInputBorder(
@@ -201,19 +227,35 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                               child: CountryCodePicker(
                                 initialSelection: 'PK',
                                 onChanged: _onCountryChange,
+                                textStyle: TextStyle(
+                                  color: Color.fromRGBO(4, 12, 34, 1),
+                                  fontFamily: 'Inter-Regular',
+                                  fontSize: 14,
+                                  letterSpacing: -0.4000000059604645,
+                                  height: 1.411764705882353
+                                ),
                               ),
                             ),
 
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20.0),
-                              width: 217,
-                              //margin: EdgeInsets.only(top: 10.0),
-                              child: TextFormField(
-                                controller: _phoneno,
-                                keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
-                                decoration: const InputDecoration(
-                                  prefixIcon: Icon(Icons.phone_android),
-                                  hintText: 'Phone no',
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                width: 215,
+                                //margin: EdgeInsets.only(top: 10.0),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(4, 12, 34, 1),
+                                      fontFamily: 'Inter-Regular',
+                                      fontSize: 17,
+                                      letterSpacing: -0.4000000059604645,
+                                      height: 1.411764705882353
+                                  ),
+                                  controller: _phoneno,
+                                  keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+                                  decoration: const InputDecoration(
+                                    prefixIcon: Icon(Icons.phone_android),
+                                    hintText: 'Phone no',
+                                  ),
                                 ),
                               ),
                             ),
@@ -228,6 +270,13 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         margin: const EdgeInsets.only(top: 10.0),
                         child: TextFormField(
+                          style: TextStyle(
+                              color: Color.fromRGBO(4, 12, 34, 1),
+                              fontFamily: 'Inter-Regular',
+                              fontSize: 17,
+                              letterSpacing: -0.4000000059604645,
+                              height: 1.411764705882353
+                          ),
                           controller: _address,
                           //maxLines: 3,
                           //expands: true,
@@ -251,6 +300,8 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                         ),
                       ),
 
+                      SizedBox(height: 80,),
+
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -258,9 +309,11 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                             const Text(
                               'Already have an account ? ',
                               style: TextStyle(
-                                fontFamily: 'Gilroy-Regular',
+                                fontFamily: 'Inter-SemiBold',
                                 fontSize: 15,
-                                fontWeight: FontWeight.bold,
+                                letterSpacing: -0.20000000298023224,
+                                height: 1.4666666666666666,
+                                fontWeight: FontWeight.normal,
                                 color: Color.fromRGBO(0, 147, 185, 1),
                               ),
                             ),
@@ -271,9 +324,11 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                               },
                               child: const Text('Sign In here',
                                 style: TextStyle(
-                                  fontFamily: 'Gilroy-Regular',
+                                  fontFamily: 'Inter-SemiBold',
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -0.20000000298023224,
+                                  height: 1.4666666666666666,
+                                  fontWeight: FontWeight.normal,
                                   color: Color.fromRGBO(0, 147, 185, 1),
                                 ),
                               ),

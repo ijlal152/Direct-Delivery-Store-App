@@ -33,7 +33,7 @@ class _AddClientState extends State<AddClient> {
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.transparent,
-            title: const Text('AddClient', style: TextStyle(color: Colors.black, fontFamily: 'Gilroy-Regular'),),
+            title: const Text('Add Client', style: TextStyle(color: Colors.black, fontFamily: 'Inter-Regular'),),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.black,),
               onPressed: (){
@@ -63,6 +63,13 @@ class _AddClientState extends State<AddClient> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       margin: const EdgeInsets.only(top: 10.0),
                       child: TextFormField(
+                        style: TextStyle(
+                            color: Color.fromRGBO(4, 12, 34, 1),
+                            fontFamily: 'Inter-Regular',
+                            fontSize: 17,
+                            letterSpacing: -0.4000000059604645,
+                            height: 1.411764705882353
+                        ),
                         //controller: _email,
                         keyboardType: TextInputType.text,
                         validator: (value){
@@ -82,7 +89,7 @@ class _AddClientState extends State<AddClient> {
                             borderSide: BorderSide(color: Colors.blue),
                           ),
                           prefixIcon: Icon(Icons.person),
-                          hintText: 'Name',
+                          labelText: 'Name',
                           fillColor: Colors.white,
                           filled: true,
                         ),
@@ -101,19 +108,35 @@ class _AddClientState extends State<AddClient> {
                             child: CountryCodePicker(
                               initialSelection: 'PK',
                               onChanged: _onCountryChange,
+                              textStyle: TextStyle(
+                                  color: Color.fromRGBO(4, 12, 34, 1),
+                                  fontFamily: 'Inter-Regular',
+                                  fontSize: 14,
+                                  letterSpacing: -0.4000000059604645,
+                                  height: 1.411764705882353
+                              ),
                             ),
                           ),
 
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20.0),
-                            width: 217,
-                            //margin: EdgeInsets.only(top: 10.0),
-                            child: TextFormField(
-                              //controller: _phoneno,
-                              keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.phone_android),
-                                hintText: 'Phone no',
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20.0),
+                              width: 217,
+                              //margin: EdgeInsets.only(top: 10.0),
+                              child: TextFormField(
+                                style: TextStyle(
+                                    color: Color.fromRGBO(4, 12, 34, 1),
+                                    fontFamily: 'Inter-Regular',
+                                    fontSize: 17,
+                                    letterSpacing: -0.4000000059604645,
+                                    height: 1.411764705882353
+                                ),
+                                //controller: _phoneno,
+                                keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.phone_android),
+                                  labelText: 'Phone no',
+                                ),
                               ),
                             ),
                           ),
@@ -124,6 +147,13 @@ class _AddClientState extends State<AddClient> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       margin: const EdgeInsets.only(top: 10.0),
                       child: TextFormField(
+                        style: TextStyle(
+                            color: Color.fromRGBO(4, 12, 34, 1),
+                            fontFamily: 'Inter-Regular',
+                            fontSize: 17,
+                            letterSpacing: -0.4000000059604645,
+                            height: 1.411764705882353
+                        ),
                         //controller: _email,
                         keyboardType: TextInputType.emailAddress,
                         validator: (value){
@@ -143,7 +173,7 @@ class _AddClientState extends State<AddClient> {
                             borderSide: BorderSide(color: Colors.blue),
                           ),
                           suffixIcon: Icon(Icons.my_location),
-                          hintText: 'GPS Locaion (Ex: 36.710343, 3.198756)',
+                          labelText: 'GPS Locaion (Ex: 36.710343, 3.198756)',
                           fillColor: Colors.white,
                           filled: true,
                         ),
@@ -154,6 +184,13 @@ class _AddClientState extends State<AddClient> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       margin: const EdgeInsets.only(top: 10.0),
                       child: TextFormField(
+                        style: TextStyle(
+                            color: Color.fromRGBO(4, 12, 34, 1),
+                            fontFamily: 'Inter-Regular',
+                            fontSize: 17,
+                            letterSpacing: -0.4000000059604645,
+                            height: 1.411764705882353
+                        ),
                         //controller: _email,
                         keyboardType: TextInputType.number,
                         validator: (value){
@@ -173,7 +210,7 @@ class _AddClientState extends State<AddClient> {
                             borderSide: BorderSide(color: Colors.blue),
                           ),
                           //suffixIcon: Icon(Icons.my_location),
-                          hintText: 'Initial Balance',
+                          labelText: 'Initial Balance',
                           fillColor: Colors.white,
                           filled: true,
                         ),
