@@ -18,7 +18,6 @@ class _ClientDashBoardState extends State<ClientDashBoard> {
     {"id": 5, "date": "11/08/2022", "balance": 'Balance: 23,700,00'},
     {"id": 6, "date": "12/04/2022", "balance": 'Balance: 32,700,00'},
     {"id": 7, "date": "13/03/2022", "balance": 'Balance: 65,700,00'},
-
   ];
 
   // This list holds the data for the list view
