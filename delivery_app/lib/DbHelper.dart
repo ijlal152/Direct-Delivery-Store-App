@@ -10,7 +10,7 @@ class DbHelper{
 
   static const String DB_Name = 'test.db';
   static const int Version = 1;
-  static const String Table_User = 'user';
+  static const String Table_User = 'User';
   static const String D_Name = 'driver_name';
   static const String D_Email = 'driver_email';
   static const String D_Password = 'driver_password';
@@ -38,10 +38,17 @@ class DbHelper{
     await db.execute("CREATE TABLE User(ID INTEGER PRIMARY KEY, driver_name TEXT, driver_email TEXT, driver_password TEXT, driver_shopname TEXT, driver_phoneno TEXT, driver_address TEXT)");
   }
 
-  Future<UserModel> saveData(UserModel user) async{
+  Future<UserModel> saveData(UserModel user, String useremail) async{
     var dbClient = await db;
     //user.D_Name = (await dbClient!.insert(Table_User, user.toMap())) as String;
-    user.D_Email = (await dbClient!.insert(Table_User, user.toMap())) as String;
+    var res = await dbClient!.rawQuery("SELECT * FROM User WHERE "
+        "$D_Email = '$useremail'");
+    if(res.isNotEmpty){
+      //alertDialog(context, "User already exists");
+      print("User already exists");
+    }else{
+      user.D_Email = (await dbClient.insert(Table_User, user.toMap())) as String;
+    }
     return user;
   }
 

@@ -60,15 +60,13 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
     if(formkey.currentState!.validate()){
       formkey.currentState!.save();
       UserModel uModel = UserModel(widget.email.toString(), widget.password.toString(), _fullname.text, _shopname.text, finalnumber.toString(), _address.text);
-      await dbHelper.saveData(uModel).then((userData){
+      await dbHelper.saveData(uModel, uModel.D_Email).then((userData){
         alertDialog(context, "Account Registered");
       }).catchError((error){
         print(error);
         alertDialog(context, "Account registered");
       });
-
     }
-
   }
 
   @override

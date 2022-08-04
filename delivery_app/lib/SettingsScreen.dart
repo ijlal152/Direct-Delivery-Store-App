@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -13,6 +17,62 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool volNotify1 = true;
   bool volNotify2 = false;
   bool volNotify3 = false;
+
+  File? _image;
+
+  Future _imgFromCamera() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if(image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this._image = imageTemp);
+    } on PlatformException catch(e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+  Future _imgFromGallery() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if(image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this._image = imageTemp);
+    } on PlatformException catch(e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }
+
 
   onChangeFunction1(bool newValue1){
     setState((){
@@ -34,64 +94,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          extendBodyBehindAppBar: true,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Text('Settings', style: TextStyle(fontFamily: 'Inter-Regular'),),
             centerTitle: true,
+            backgroundColor: Colors.transparent,
+            
+             actions: [
+               Container(
+                 margin: EdgeInsets.only(right: 10),
+                   child: Icon(Icons.logout_outlined, color: Colors.black, size: 30,)
+               ),
+             ],
+            
           ),
           body: Container(
             padding: EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromRGBO(232, 235, 245, 1),
+                    Color.fromRGBO(251, 252, 255, 1),
+                  ]
+              ),
+            ),
             child: ListView(
               children: [
-                SizedBox(height: 30,),
-                Row(
-                  children: [
-                    Icon(Icons.person, color: Colors.blue,),
-                    SizedBox(width: 10,),
-                    Text('Account', style: TextStyle(fontFamily: 'Inter-Regular', fontWeight: FontWeight.bold),)
-                  ],
-                ),
-                Divider(height: 20, thickness: 1,),
-                SizedBox(height: 10,),
-                builAccountOption(context, 'Change Password'),
-                //builAccountOption(context, 'Content Settings'),
-                //builAccountOption(context, 'Social'),
-                builAccountOption(context, 'Language'),
-                builAccountOption(context, 'Privacy and Security'),
-                SizedBox(height: 40,),
-                Row(
-                  children: [
-                    Icon(Icons.volume_up_outlined, color: Colors.blue,),
-                    SizedBox(width: 10,),
-                    Text('Notifications', style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),),
-                  ],
-                ),
-                Divider(height: 20, thickness: 1,),
-                SizedBox(height: 10,),
-                buildNotificationsOption('Theme Dark', volNotify1, onChangeFunction1),
-                //buildNotificationsOption('Account Active', volNotify2, onChangeFunction2),
-                //buildNotificationsOption('Opportunity', volNotify3, onChangeFunction3),
-                SizedBox(height: 30,),
                 Center(
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.cyan,
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  child: GestureDetector(
+                    onTap: (){
+                      _showPicker(context);
+                    },
+
+                    child: CircleAvatar(
+                      radius: 55,
+                      backgroundColor:  Color(0xffFDCF09),
+                      child: _image != null ? ClipOval(
+                        child: Image.file(_image!, width: 100, height: 100,fit: BoxFit.cover),
                       )
-                    ), onPressed: (){},
-                    child: Text('Sign Out', style: TextStyle(
-                      fontFamily: 'Inter-Regular',
-                      fontSize: 16,
-                      letterSpacing: 2.2,
-                      color: Colors.white,
-                    ),),
+                          : Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(50)),
+                        width: 100,
+                        height: 100,
+                        child: Icon(Icons.camera_alt, color: Colors.grey[800],),
+                        ),
+                      ),
+                    ),
                   ),
+                Divider(height: 15,),
+                Center(
+                  
                 ),
-              ],
+    ],
             ),
           ),
         )
