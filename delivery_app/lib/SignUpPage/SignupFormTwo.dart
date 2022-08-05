@@ -223,7 +223,7 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: CountryCodePicker(
-                                initialSelection: 'PK',
+                                //initialSelection: 'PK',
                                 onChanged: _onCountryChange,
                                 textStyle: TextStyle(
                                   color: Color.fromRGBO(4, 12, 34, 1),

@@ -1,4 +1,4 @@
-import 'package:delivery_app/SettingsScreen.dart';
+import 'package:delivery_app/ProfileInfoPage.dart';
 import 'package:delivery_app/TreasuryPages/TresuryPage.dart';
 import 'package:delivery_app/clientpages/clientpages.dart';
 import 'package:delivery_app/productPages/allProducts.dart';
@@ -16,6 +16,8 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   Future<SharedPreferences> _pref = SharedPreferences.getInstance();
   String userShopName = "";
@@ -40,6 +42,84 @@ class _HomePageScreenState extends State<HomePageScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        endDrawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromRGBO(43, 136, 216, 1),
+                      Color.fromRGBO(43, 136, 216, 1)
+                    ],
+                  ),
+                ),
+                currentAccountPicture: FlutterLogo(),
+                accountName: Text('My account'),
+                accountEmail: Text('ijlalhussan123@gmail.com'),
+              ),
+              ListTile(
+                leading: Icon(Icons.person_pin_outlined),
+                title: Text('Profile'),
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_)=>const ProfileInfoPage()));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.currency_exchange),
+                title: Text('Currency'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.language_outlined),
+                title: Text('Language'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.print_outlined),
+                title: Text('Printing'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.subscriptions_outlined),
+                title: Text('Subscription'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.settings_backup_restore_sharp),
+                title: Text('Backup status'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              AboutListTile(
+                icon: Icon(Icons.info),
+                child: Text('About app'),
+                applicationIcon: Icon(Icons.local_play),
+                applicationName: 'POS App',
+                applicationVersion: 'Under development',
+                applicationLegalese: '© 2022 Company',
+                aboutBoxChildren: [
+                  ///Content goes here...
+                ],
+              )
+            ],
+          ),
+        ),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -90,14 +170,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(right: 20),
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_)=>const SettingsScreen()));
-                        },
-                          child: Icon(Icons.settings_outlined, color: Colors.white)
+                    GestureDetector(
+                      onTap: () => _key.currentState!.openEndDrawer(),
+                      child: Container(
+                        margin: EdgeInsets.only(right: 20),
+                        child: Icon(Icons.settings_outlined, color: Colors.white),
                       ),
                     )
                   ],
