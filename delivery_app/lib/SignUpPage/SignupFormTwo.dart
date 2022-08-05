@@ -59,16 +59,14 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
 
     if(formkey.currentState!.validate()){
       formkey.currentState!.save();
-      UserModel uModel = UserModel(widget.email.toString(), widget.password.toString(), _fullname.text, _shopname.text, finalnumber.toString(), _address.text);
-      await dbHelper.saveData(uModel).then((userData){
+      UserModel uModel = UserModel(widget.email.toString(), widget.password.toString(), _fullname.text, _shopname.text, countrycode.toString(), _phoneno.text ,finalnumber.toString(), _address.text);
+      await dbHelper.saveData(uModel, uModel.D_Email).then((userData){
         alertDialog(context, "Account Registered");
       }).catchError((error){
         print(error);
         alertDialog(context, "Account registered");
       });
-
     }
-
   }
 
   @override
@@ -225,7 +223,7 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: CountryCodePicker(
-                                initialSelection: 'PK',
+                                //initialSelection: 'PK',
                                 onChanged: _onCountryChange,
                                 textStyle: TextStyle(
                                   color: Color.fromRGBO(4, 12, 34, 1),

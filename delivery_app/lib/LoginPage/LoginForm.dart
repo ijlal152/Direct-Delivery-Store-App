@@ -66,10 +66,13 @@ class _LoginFormState extends State<LoginForm> {
     final SharedPreferences sp = await _pref;
 
     sp.setString("driver_shopname", user.D_ShopName!);
-    //sp.setString("driver_shopname", user.D_Email!);
-    //sp.setString("driver_shopname", user.D_Name!);
-    //sp.setString("driver_shopname", user.D_Address!);
-    //sp.setString("driver_shopname", shopname!);
+    sp.setString("driver_email", user.D_Email!);
+    sp.setString("driver_name", user.D_Name!);
+    sp.setString("driver_address", user.D_Address!);
+    sp.setString("driver_countrycode", user.D_phonecountrycode!);
+    sp.setString("driver_phoneno", user.D_Phoneno!);
+    sp.setString("driver_fullphoneno", user.D_fullphoneno!);
+    //sp.setString("driver_shopname", user.shopname!);
   }
 
   @override

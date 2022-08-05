@@ -8,14 +8,16 @@ class DbHelper{
 
   static Database? _db;
 
-  static const String DB_Name = 'test.db';
+  static const String DB_Name = 'Driver.db';
   static const int Version = 1;
-  static const String Table_User = 'user';
+  static const String Table_User = 'Driver_Table';
   static const String D_Name = 'driver_name';
   static const String D_Email = 'driver_email';
   static const String D_Password = 'driver_password';
   static const String D_ShopName = 'driver_shopname';
+  static const String D_phonecountrycode = 'driver_countrycode';
   static const String D_Phoneno = 'driver_phoneno';
+  static const String D_Fullphoneno = 'driver_fullphoneno';
   static const String D_Address = 'driver_address';
 
   Future<Database?> get db async{
@@ -34,20 +36,31 @@ class DbHelper{
     return db;
   }
 
+  // _onCreate(Database db, int intVersion) async{
+  //   await db.execute("CREATE TABLE User(ID INTEGER PRIMARY KEY, driver_name TEXT, driver_email TEXT, driver_password TEXT, driver_shopname TEXT, driver_phoneno TEXT, driver_address TEXT)");
+  // }
+
   _onCreate(Database db, int intVersion) async{
-    await db.execute("CREATE TABLE User(ID INTEGER PRIMARY KEY, driver_name TEXT, driver_email TEXT, driver_password TEXT, driver_shopname TEXT, driver_phoneno TEXT, driver_address TEXT)");
+    await db.execute("CREATE TABLE Driver_Table(ID INTEGER PRIMARY KEY, driver_name TEXT, driver_email TEXT, driver_password TEXT, driver_shopname TEXT, driver_countrycode TEXT, driver_phoneno TEXT, driver_fullphoneno TEXT, driver_address TEXT)");
   }
 
-  Future<UserModel> saveData(UserModel user) async{
+  Future<UserModel> saveData(UserModel user, String useremail) async{
     var dbClient = await db;
     //user.D_Name = (await dbClient!.insert(Table_User, user.toMap())) as String;
-    user.D_Email = (await dbClient!.insert(Table_User, user.toMap())) as String;
+    var res = await dbClient!.rawQuery("SELECT * FROM Driver_Table WHERE "
+        "$D_Email = '$useremail'");
+    if(res.isNotEmpty){
+      //alertDialog(context, "User already exists");
+      print("User already exists");
+    }else{
+      user.D_Email = (await dbClient.insert(Table_User, user.toMap())) as String;
+    }
     return user;
   }
 
   Future<UserModel> getLoginUser(String useremail, String userpassword) async{
     var dbClient = await db;
-    var res = await dbClient!.rawQuery("SELECT * FROM User WHERE "
+    var res = await dbClient!.rawQuery("SELECT * FROM Driver_Table WHERE "
         "$D_Email = '$useremail' AND "
         "$D_Password = '$userpassword'");
     if(res.isNotEmpty){

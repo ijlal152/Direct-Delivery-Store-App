@@ -13,10 +13,79 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
 
+  final _formKey = GlobalKey<FormState>();
+
   bool _isObscure = true;
+  bool _isPasswordEightCharacters = false;
+  bool _hasPasswordOneNumber = false;
+  bool _hasPasswordCapital = false;
+  bool _hasspecialLetter = false;
 
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+
+  RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
+  double password_strength = 0;
+
+  bool validatePassword(String pass){
+    String _password = pass.trim();
+
+    if(_password.isEmpty){
+      setState(() {
+        password_strength = 0;
+      });
+    }else if(_password.length < 6 ){
+      setState(() {
+        password_strength = 1 / 4;
+      });
+    }else if(_password.length < 8){
+      setState(() {
+        password_strength = 2 / 4;
+      });
+    }else{
+      if(pass_valid.hasMatch(_password)){
+        setState(() {
+          password_strength = 4 / 4;
+        });
+        return true;
+      }else{
+        setState(() {
+          password_strength = 3 / 4;
+        });
+        return false;
+      }
+    }
+    return false;
+  }
+
+  onPasswordChanged(String password) {
+    final numericRegex = RegExp(r'[0-9]');
+    RegExp letterReg = RegExp("^(?=.*[A-Z])");
+    RegExp regex=RegExp(r'^(?=.*?[A-Z])(?=.*?[!@#\$&*~]).{8,}$');
+    RegExp specialCharacters = RegExp(r'(?=.*?[#?!@$%^&*-])$');
+    
+
+    setState(() {
+      _isPasswordEightCharacters = false;
+      if(password.length >= 8) {
+        _isPasswordEightCharacters = true;
+      }
+
+      _hasPasswordOneNumber = false;
+      if(numericRegex.hasMatch(password)) {
+        _hasPasswordOneNumber = true;
+      }
+      //(?=.*[@#$%^&+=])
+      // (?=.*?[#?!@$%^&*-])
+      _hasPasswordCapital = false;
+      _hasspecialLetter = false;
+      if(letterReg.hasMatch(password) || (specialCharacters.hasMatch(password))) {
+        _hasPasswordCapital = true;
+        _hasspecialLetter = true;
+      }
+
+    });
+  }
 
   checkif_fields_are_empty(){
     if(_email.text.isEmpty){
@@ -71,7 +140,9 @@ class _SignupFormState extends State<SignupForm> {
               ]
             ),
           ),
+
           child: Form(
+            key: _formKey,
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Center(
@@ -80,7 +151,7 @@ class _SignupFormState extends State<SignupForm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(height: 80,),
-                        Image.asset('assets/images/driver.png', height: 110,),
+                        Image.asset('assets/images/driver.png', height: 100,),
                         const SizedBox(height: 25,),
                         Align(
                           alignment: Alignment.topLeft,
@@ -124,6 +195,7 @@ class _SignupFormState extends State<SignupForm> {
                             ),
                             controller: _email,
                             keyboardType: TextInputType.emailAddress,
+
                             validator: (value){
                               if(value == null || value.isEmpty){
                                 return alertDialog(context, 'Please enter email');
@@ -132,6 +204,9 @@ class _SignupFormState extends State<SignupForm> {
                                 return alertDialog(context, 'Please enter a valid email');
                               }
                               return null;
+                            },
+                            onChanged: (value){
+                              _formKey.currentState!.validate();
                             },
                             onSaved: (val) => _email.text = val!,
                             decoration: const InputDecoration(
@@ -162,8 +237,27 @@ class _SignupFormState extends State<SignupForm> {
                                 letterSpacing: -0.4000000059604645,
                                 height: 1.411764705882353
                             ),
+                            //onChanged: (_password) => onPasswordChanged(_password),
+                            onChanged: (_password){
+                              _formKey.currentState!.validate();
+                              onPasswordChanged(_password);
+                            },
                             controller: _password,
                             obscureText: _isObscure,
+                            validator: (_password){
+                              if(_password!.isEmpty){
+                                return "Please enter password";
+                              }else{
+                                //call function to check password
+                                bool result = validatePassword(_password);
+                                if(result){
+                                  // create account event
+                                  return null;
+                                }else{
+                                  //return " Password should contain Capital, small letter & Number & Special";
+                                }
+                              }
+                            },
                             decoration:  InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -193,50 +287,101 @@ class _SignupFormState extends State<SignupForm> {
                         ),
                         SizedBox(height: 10,),
 
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: LinearProgressIndicator(
+                            value: password_strength,
+                            backgroundColor: Colors.grey[300],
+                            minHeight: 5,
+                            color: password_strength <= 1 / 4
+                                ? Colors.red
+                                : password_strength == 2 / 4
+                                ? Colors.yellow
+                                : password_strength == 3 / 4
+                                ? Colors.blue
+                                : Colors.green,
+                          ),
+                        ),
+
                         Container(
                           margin: EdgeInsets.only(top: 7 ,left: 26),
                           child: Column(
                             children: <Widget>[
                               Row(
                                 children: <Widget>[
-                                  Icon(Icons.check, color: Colors.green,),
-                                  SizedBox(width: 7,),
-                                  Text('Has at least 8 characters',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(92, 97, 111, 1),
-                                    fontFamily: 'Inter-Regular',
-                                    fontSize: 13,
-                                    letterSpacing: -0.11999999731779099,
-                                      height: 1.3846153846153846
-                                  ),),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Icon(Icons.check, color: Colors.green,),
-                                  SizedBox(width: 7,),
-                                  Text('Has an uppercase letter or symbol',
+                                  AnimatedContainer(
+                                    duration: Duration(milliseconds: 500),
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                        color: _isPasswordEightCharacters ?  Colors.green : Colors.transparent,
+                                        border: _isPasswordEightCharacters ? Border.all(color: Colors.transparent) :
+                                        Border.all(color: Colors.grey.shade400),
+                                        borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: Center(child: Icon(Icons.check, color: Colors.white, size: 15,),),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  Text("Has at least 8 characters",
                                     style: TextStyle(
                                         color: Color.fromRGBO(92, 97, 111, 1),
                                         fontFamily: 'Inter-Regular',
                                         fontSize: 13,
                                         letterSpacing: -0.11999999731779099,
                                         height: 1.3846153846153846
-                                    ),),
+                                    ),)
                                 ],
                               ),
+                              SizedBox(height: 5,),
                               Row(
                                 children: <Widget>[
-                                  Icon(Icons.check, color: Colors.green,),
-                                  SizedBox(width: 7,),
-                                  Text('Has a number',
+                                  AnimatedContainer(
+                                    duration: Duration(milliseconds: 500),
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                        color: _hasPasswordCapital || _hasspecialLetter ?  Colors.green : Colors.transparent,
+                                        border: _hasPasswordCapital || _hasspecialLetter ? Border.all(color: Colors.transparent) :
+                                        Border.all(color: Colors.grey.shade400),
+                                        borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: Center(child: Icon(Icons.check, color: Colors.white, size: 15,),),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  Text("Has an upper case letter or symbol",
                                     style: TextStyle(
                                         color: Color.fromRGBO(92, 97, 111, 1),
                                         fontFamily: 'Inter-Regular',
                                         fontSize: 13,
                                         letterSpacing: -0.11999999731779099,
                                         height: 1.3846153846153846
-                                    ),),
+                                    ),)
+                                ],
+                              ),
+                              SizedBox(height: 5,),
+                              Row(
+                                children: <Widget>[
+                                  AnimatedContainer(
+                                    duration: Duration(milliseconds: 500),
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                        color: _hasPasswordOneNumber ?  Colors.green : Colors.transparent,
+                                        border: _hasPasswordOneNumber ? Border.all(color: Colors.transparent) :
+                                        Border.all(color: Colors.grey.shade400),
+                                        borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: Center(child: Icon(Icons.check, color: Colors.white, size: 15,),),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  Text("Has a number",
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(92, 97, 111, 1),
+                                        fontFamily: 'Inter-Regular',
+                                        fontSize: 13,
+                                        letterSpacing: -0.11999999731779099,
+                                        height: 1.3846153846153846
+                                    ),)
                                 ],
                               ),
                             ],
@@ -318,11 +463,6 @@ class _SignupFormState extends State<SignupForm> {
                             //width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0),
-                              //color: Color.fromRGBO(43, 136, 216, 1),
-                              //color: Color.fromRGBO(232, 235, 238, 1),
-                              //color: Color.fromRGBO(43, 136, 216, 1),
-
-
                             ),
                             child: ElevatedButton(
                               style:  ElevatedButton.styleFrom(
@@ -333,12 +473,11 @@ class _SignupFormState extends State<SignupForm> {
                                   //fontSize: 17,
                                 )
                               ),
-                              onPressed: (){
+                              onPressed: password_strength != 1 ? null : (){
                                 checkif_fields_are_empty();
                               },
                               child: const Text('Continue',
                                 style: TextStyle(
-                                  //fontFamily: 'Gilroy-Regular',
                                   color: Colors.white,
                                   fontSize: 17,
                                   //fontWeight: FontWeight.bold,
