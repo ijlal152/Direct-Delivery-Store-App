@@ -56,7 +56,7 @@ class _LoginFormState extends State<LoginForm> {
       // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
       //     HomePageScreen()), (Route<dynamic> route) => false);
     }).catchError((error){
-      print(error);
+      //print(error);
       alertDialog(context, "Error: Login failed");
     });
     //await dbHelper.getLoginUser(useremail, userpass)
@@ -72,7 +72,6 @@ class _LoginFormState extends State<LoginForm> {
     sp.setString("driver_countrycode", user.D_phonecountrycode!);
     sp.setString("driver_phoneno", user.D_Phoneno!);
     sp.setString("driver_fullphoneno", user.D_fullphoneno!);
-    //sp.setString("driver_shopname", user.shopname!);
   }
 
   @override

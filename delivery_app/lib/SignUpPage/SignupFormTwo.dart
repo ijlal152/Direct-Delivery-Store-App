@@ -44,9 +44,7 @@ class _SignupFormTwoState extends State<SignupFormTwo> {
 
 
   registerAccount() async{
-
     //final form = formkey.currentState;
-
     if(_fullname.text.isEmpty){
       alertDialog(context, "Please enter full name");
     }else if(_shopname.text.isEmpty){

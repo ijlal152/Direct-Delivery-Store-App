@@ -3,6 +3,7 @@ import 'package:delivery_app/SignUpPage/SignupFormTwo.dart';
 import 'package:delivery_app/comHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({Key? key}) : super(key: key);
@@ -26,6 +27,11 @@ class _SignupFormState extends State<SignupForm> {
 
   RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
   double password_strength = 0;
+
+
+
+  bool _isValid = false;
+
 
   bool validatePassword(String pass){
     String _password = pass.trim();
@@ -201,7 +207,7 @@ class _SignupFormState extends State<SignupForm> {
                                 return alertDialog(context, 'Please enter email');
                               }
                               if(!validateEmail(value)){
-                                return alertDialog(context, 'Please enter a valid email');
+                                return 'Please enter a valid email';
                               }
                               return null;
                             },
@@ -475,6 +481,8 @@ class _SignupFormState extends State<SignupForm> {
                               ),
                               onPressed: password_strength != 1 ? null : (){
                                 checkif_fields_are_empty();
+                                //_isValid = EmailValidator.validate(_email.text);
+                                //if(_isValid == true){print("valid email");}
                               },
                               child: const Text('Continue',
                                 style: TextStyle(
@@ -485,7 +493,6 @@ class _SignupFormState extends State<SignupForm> {
                               ),
                             )
                         ),
-
                       ],
                     ),
                   ),

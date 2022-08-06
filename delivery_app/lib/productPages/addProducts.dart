@@ -1,6 +1,9 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:delivery_app/DbHelper.dart';
+import 'package:delivery_app/Model/productModel.dart';
 import 'package:delivery_app/comHelper.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 class AddProducts extends StatefulWidget {
   const AddProducts({Key? key}) : super(key: key);
@@ -10,8 +13,60 @@ class AddProducts extends StatefulWidget {
 }
 
 class _AddProductsState extends State<AddProducts> {
+
+  final formkey = GlobalKey<FormState>();
+
+  TextEditingController prod_name = TextEditingController();
+  TextEditingController prod_sku = TextEditingController();
+  TextEditingController prod_purchaseprice = TextEditingController();
+  TextEditingController prod_sellingprice = TextEditingController();
+  TextEditingController prod_initqtyofunits = TextEditingController();
+  TextEditingController prod_qtyperpkg = TextEditingController();
+  TextEditingController prod_initqtyofpkgs = TextEditingController();
+
+  var dbHelper;
+
+  @override
+  void initState(){
+    super.initState();
+    dbHelper = DbHelper();
+  }
+
+  AddNewProduct() async{
+    if(prod_name.text.isEmpty){
+      alertDialog(context, "Please enter prodcut name");
+    }else if(prod_sku.text.isEmpty){
+      alertDialog(context, "Please enter prodcut SKU");
+    }else if(prod_purchaseprice.text.isEmpty){
+      alertDialog(context, "Please enter purchase price");
+    }else if(prod_sellingprice.text.isEmpty){
+      alertDialog(context, "Please enter selling price");
+    }else if(prod_initqtyofunits.text.isEmpty){
+      alertDialog(context, "Enter Initial Quantity of units");
+    }else if(prod_qtyperpkg.text.isEmpty){
+      alertDialog(context, "Enter Quantity Per Package");
+    }else if(prod_initqtyofpkgs.text.isEmpty){
+      alertDialog(context, "Enter Quantity of Packages");
+    }
+
+    if(formkey.currentState!.validate()){
+      formkey.currentState!.save();
+      //clientLocation.text = widget.lat.toString() + widget.lng.toString();
+      productModel pModel = productModel(prod_name.text, prod_sku.text, prod_purchaseprice.text, prod_sellingprice.text, prod_initqtyofunits.text, prod_qtyperpkg.text, prod_initqtyofpkgs.text);
+      await dbHelper.saveProductData(pModel).then((product){
+        alertDialog(context, "Product added");
+      }).catchError((error){
+        print(error);
+        alertDialog(context, "Product added");
+      });
+    }
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -41,6 +96,7 @@ class _AddProductsState extends State<AddProducts> {
             ),
           ),
           child: Form(
+            key: formkey,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -53,6 +109,7 @@ class _AddProductsState extends State<AddProducts> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     margin: const EdgeInsets.only(top: 10.0),
                     child: TextFormField(
+                      controller: prod_name,
                       style: TextStyle(
                           color: Color.fromRGBO(4, 12, 34, 1),
                           fontFamily: 'Inter-Regular',
@@ -60,7 +117,6 @@ class _AddProductsState extends State<AddProducts> {
                           letterSpacing: -0.4000000059604645,
                           height: 1.411764705882353
                       ),
-                      //controller: _email,
                       keyboardType: TextInputType.text,
                       validator: (value){
                         if(value == null || value.isEmpty){
@@ -89,6 +145,7 @@ class _AddProductsState extends State<AddProducts> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     margin: const EdgeInsets.only(top: 10.0),
                     child: TextFormField(
+                      controller: prod_sku,
                       style: TextStyle(
                           color: Color.fromRGBO(4, 12, 34, 1),
                           fontFamily: 'Inter-Regular',
@@ -134,6 +191,7 @@ class _AddProductsState extends State<AddProducts> {
                           //margin: const EdgeInsets.only(top: 10.0),
                           width: 150,
                           child: TextFormField(
+                            controller: prod_purchaseprice,
                             style: TextStyle(
                                 color: Color.fromRGBO(4, 12, 34, 1),
                                 fontFamily: 'Inter-Regular',
@@ -159,7 +217,7 @@ class _AddProductsState extends State<AddProducts> {
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                 borderSide: BorderSide(color: Colors.blue),
                               ),
-                              labelText: 'Product Price',
+                              labelText: 'Purchase Price',
                               fillColor: Colors.white,
                               filled: true,
                             ),
@@ -171,6 +229,7 @@ class _AddProductsState extends State<AddProducts> {
                           //margin: const EdgeInsets.only(top: 10.0),
                           width: 150,
                           child: TextFormField(
+                            controller: prod_sellingprice,
                             style: TextStyle(
                                 color: Color.fromRGBO(4, 12, 34, 1),
                                 fontFamily: 'Inter-Regular',
@@ -210,6 +269,7 @@ class _AddProductsState extends State<AddProducts> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     margin: const EdgeInsets.only(top: 10.0),
                     child: TextFormField(
+                      controller: prod_initqtyofunits,
                       style: TextStyle(
                           color: Color.fromRGBO(4, 12, 34, 1),
                           fontFamily: 'Inter-Regular',
@@ -246,6 +306,7 @@ class _AddProductsState extends State<AddProducts> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     margin: const EdgeInsets.only(top: 10.0),
                     child: TextFormField(
+                      controller: prod_qtyperpkg,
                       style: TextStyle(
                           color: Color.fromRGBO(4, 12, 34, 1),
                           fontFamily: 'Inter-Regular',
@@ -283,6 +344,7 @@ class _AddProductsState extends State<AddProducts> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     margin: const EdgeInsets.only(top: 10.0),
                     child: TextFormField(
+                      controller: prod_initqtyofpkgs,
                       style: TextStyle(
                           color: Color.fromRGBO(4, 12, 34, 1),
                           fontFamily: 'Inter-Regular',
@@ -332,8 +394,7 @@ class _AddProductsState extends State<AddProducts> {
                             )
                         ),
                         onPressed: (){
-                          //checkif_fields_are_empty();
-                          //login();
+                          AddNewProduct();
                         },
                         child: const Text('Add Product',
                           style: TextStyle(
